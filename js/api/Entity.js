@@ -33,7 +33,7 @@ class Entity {
      url: this.HOST + this.URL,
      method: 'POST',
      responseType: 'json',
-     data: Object.assign ({_method: 'PUT'}, data), //!
+     data: Object.assign ({_method: 'PUT'}, data),
      callback
     });
 
@@ -74,4 +74,3 @@ class Entity {
 
 Entity.URL = '';
 Entity.HOST = 'https://bhj-diplom.letsdocode.ru';
-

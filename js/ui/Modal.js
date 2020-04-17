@@ -13,6 +13,13 @@ class Modal {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
+      
+    if (!element) {
+      throw new error ('Элемент не найден'); 
+    }
+
+    this.element = element;
+    this.registerEvents();
 
   }
 
@@ -22,6 +29,14 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
+      
+    const dataDismiss = this.element.querySelectorAll('[data-dismiss="modal"]');
+
+    for (let data of dataDismiss) {
+      data.addEventListener ('click', (e) => {
+        this.onClose(e);
+      })
+    }
 
   }
 
@@ -29,13 +44,24 @@ class Modal {
    * Срабатывает после нажатия на элементы, закрывающие окно.
    * Закрывает текущее окно (Modal.close())
    * */
-  onClose( e ) {
+  onClose(e) {
+      
+    e.preventDefault();
+    this.close();
 
   }
   /**
    * Удаляет обработчики событий
    * */
   unregisterEvents() {
+      
+    const dataDismiss = this.element.querySelectorAll('[data-dismiss="modal"]');
+   
+    for (let data of dataDismiss) {
+      data.removeEventListener ('click', (e) => {
+        this.onClose(e);
+      })
+    }
 
   }
   /**
@@ -43,12 +69,16 @@ class Modal {
    * со значением «block»
    * */
   open() {
+      
+    this.element.style.display = 'block';
 
   }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
-  close(){
+  close() {
+      
+    this.element.style.display = '';
 
   }
 }

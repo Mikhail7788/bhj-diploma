@@ -11,8 +11,7 @@ class User {
    * */
   static setCurrent(user) {
       
-      localStorage.user = JSON.stringify(user);
-
+    localStorage.user = JSON.stringify(user);
   }
 
   /**
@@ -21,8 +20,7 @@ class User {
    * */
   static unsetCurrent() {
       
-      delete localStorage.user;
-
+    delete localStorage.user;
   }
 
   /**
@@ -31,10 +29,9 @@ class User {
    * */
   static current() {
       
-      if (localStorage.user) {
+    if (localStorage.user) {
       return JSON.parse(localStorage.user);
     }
-
   }
 
   /**
@@ -43,7 +40,7 @@ class User {
    * */
   static fetch( data, callback = f => f ) {
       
-      return createRequest ({
+    return createRequest ({
       url: this.HOST + this.URL + '/current',
       method: 'GET',
       responseType: 'json',
@@ -51,13 +48,12 @@ class User {
       callback: (err, response) => {
         if (response.user) {
           this.setCurrent(response.user);
-        } else {
-          this.unsetCurrent();
-        }
+          } else {
+            this.unsetCurrent();
+          }
         callback(err, response);
       }
     });
-
   }
 
   /**
@@ -68,19 +64,18 @@ class User {
    * */
   static login( data, callback = f => f ) {
       
-      return createRequest ({
+    return createRequest ({
       url: this.HOST + this.URL + '/login',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response.user && (response.success === true)) {
+        if (response.user && response.success) {
           User.setCurrent(response.user);
         } 
         callback(err, response);
       }      
-    })
-
+    });
   }
 
   /**
@@ -91,19 +86,18 @@ class User {
    * */
   static register( data, callback = f => f ) {
       
-      return createRequest({
+    return createRequest({
       url: this.HOST + this.URL + '/register',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response.user && (response.success === true)) {
+        if (response.user && response.success) {
           User.setCurrent(response.user);
         } 
         callback(err, response);
       }         
-    })
-
+    });
   }
 
   /**
@@ -112,17 +106,17 @@ class User {
    * */
   static logout( data, callback = f => f ) {
       
-     return createRequest ({
+    return createRequest ({
       url: this.HOST + this.URL + '/logout',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response.user && (response.success === true)) {
+        if (response.user && response.success) {
           User.unsetCurrent();
         } 
         callback(err, response);
       }         
-    })
+    });
   }
 }
