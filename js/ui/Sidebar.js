@@ -50,7 +50,7 @@ class Sidebar {
     });
     menuItemLogout.addEventListener('click', () => {
      User.logout ({}, (err, response) => {
-      if (response) {
+      if (response && response.success) {
         App.setState('init');
       }
      });
