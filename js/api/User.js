@@ -107,17 +107,20 @@ class User {
    * */
   static logout( data, callback = f => f ) {
       
-    return createRequest ({
-      url: this.HOST + this.URL + '/logout',
-      method: 'POST',
-      responseType: 'json',
+    return createRequest({
+      url: `${this.HOST}${this.URL}/logout`,
+      method: "POST",
       data,
       callback: (err, response) => {
-        if (response.user && response.success) {
-          User.unsetCurrent();
-        } 
-        callback(err, response);
-      }         
-    });
+        if (response.success) {
+          this.unsetCurrent();
+        } else {
+          console.log(err);
+        };
+      }
+    })
   }
 }
+
+User.URL = '/user';
+User.HOST = Entity.HOST;
