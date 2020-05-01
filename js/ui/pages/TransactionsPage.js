@@ -143,13 +143,13 @@ class TransactionsPage {
    * */
   formatDate( date ) {
       
-    let date = new Date(date);
+    let formDate = new Date(date);
     let months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
-    let month = months[date.getMonth()];
-    let day = date.getDate();
-    let year = date.getFullYear();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    let month = months[formDate.getMonth()];
+    let day = formDate.getDate();
+    let year = formDate.getFullYear();
+    let hours = formDate.getHours();
+    let minutes = formDate.getMinutes();
 
     function format(e) {
       if (e < 10) {

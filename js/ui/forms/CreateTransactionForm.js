@@ -32,7 +32,7 @@ class CreateTransactionForm extends AsyncForm {
       } else {
         console.log("Ошибка при получении списка счетов");
       }        
-    });
+    })
 
   }
 
